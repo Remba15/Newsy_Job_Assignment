@@ -1,0 +1,6 @@
+@Newsy_Job_Assignment_HostAddress = http://localhost:5037
+
+GET {{Newsy_Job_Assignment_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
