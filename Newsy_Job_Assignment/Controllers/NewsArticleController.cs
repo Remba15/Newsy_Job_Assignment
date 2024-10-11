@@ -6,46 +6,44 @@ namespace Newsy_Job_Assignment.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class NewsUserController(NewsyContext context) : NewsyController(context)
+    public class NewsArticleController(NewsyContext context) : NewsyController(context)
     {
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_context.newsuser);
+            return Ok(_context.newsarticle);
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public IActionResult Get(int id)
         {
-            return Ok(_context.newsuser.Find(id));
+            return Ok(_context.newsarticle.Find(id));
         }
 
         [HttpPost]
-        public IActionResult Post(NewsUser user)
+        public IActionResult Post(NewsArticle article)
         {
-            _context.newsuser.Add(user);
+            _context.newsarticle.Add(article);
             _context.SaveChanges();
-            return StatusCode(StatusCodes.Status201Created, user);
+            return StatusCode(StatusCodes.Status201Created, article);
         }
 
         [HttpPut]
         [Route("{id:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int id, NewsUser user)
+        public IActionResult Put(int id, NewsArticle article)
         {
 
-            var userDb = _context.newsuser.Find(id);
+            var articleDb = _context.newsarticle.Find(id);
 
-            //Manual for database test, later mapper
-            userDb.name = user.name;
-            userDb.surname = user.surname;
-            userDb.email = user.email;
-            userDb.author = user.author;
-            userDb.registrationdate = user.registrationdate;
+            articleDb.title = article.title;
+            articleDb.articletext = article.articletext;
+            articleDb.authorid = article.authorid;
+            articleDb.publishdate = article.publishdate;
 
-            _context.newsuser.Update(userDb);
+            _context.newsarticle.Update(articleDb);
             _context.SaveChanges();
 
             return Ok(new { message = "Successfully updated." });
@@ -57,9 +55,9 @@ namespace Newsy_Job_Assignment.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int id)
         {
-            var userDb = _context.newsuser.Find(id);
+            var articleDb = _context.newsarticle.Find(id);
 
-            _context.newsuser.Remove(userDb);
+            _context.newsarticle.Remove(articleDb);
             _context.SaveChanges();
 
             return Ok(new { message = "Successfully deleted." });
