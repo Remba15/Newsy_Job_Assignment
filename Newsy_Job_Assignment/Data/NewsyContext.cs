@@ -10,8 +10,8 @@ namespace Newsy_Job_Assignment.Data
             
         }
 
-        public DbSet<NewsUser> newsuser { get; set; }
-        public DbSet<NewsArticle> newsarticle { get; set; }
+        public DbSet<News_User> news_user { get; set; }
+        public DbSet<News_Article> news_article { get; set; }
 
     }
 }

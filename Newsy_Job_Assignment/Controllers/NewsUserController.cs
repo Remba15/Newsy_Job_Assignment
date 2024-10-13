@@ -12,20 +12,20 @@ namespace Newsy_Job_Assignment.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_context.newsuser);
+            return Ok(_context.news_user);
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public IActionResult Get(int id)
         {
-            return Ok(_context.newsuser.Find(id));
+            return Ok(_context.news_user.Find(id));
         }
 
         [HttpPost]
-        public IActionResult Post(NewsUser user)
+        public IActionResult Post(News_User user)
         {
-            _context.newsuser.Add(user);
+            _context.news_user.Add(user);
             _context.SaveChanges();
             return StatusCode(StatusCodes.Status201Created, user);
         }
@@ -33,19 +33,19 @@ namespace Newsy_Job_Assignment.Controllers
         [HttpPut]
         [Route("{id:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int id, NewsUser user)
+        public IActionResult Put(int id, News_User user)
         {
 
-            var userDb = _context.newsuser.Find(id);
+            var userDb = _context.news_user.Find(id);
 
             //Manual for database test, later mapper
             userDb.name = user.name;
             userDb.surname = user.surname;
             userDb.email = user.email;
             userDb.author = user.author;
-            userDb.registrationdate = user.registrationdate;
+            userDb.registration_date = user.registration_date;
 
-            _context.newsuser.Update(userDb);
+            _context.news_user.Update(userDb);
             _context.SaveChanges();
 
             return Ok(new { message = "Successfully updated." });
@@ -57,9 +57,9 @@ namespace Newsy_Job_Assignment.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int id)
         {
-            var userDb = _context.newsuser.Find(id);
+            var userDb = _context.news_user.Find(id);
 
-            _context.newsuser.Remove(userDb);
+            _context.news_user.Remove(userDb);
             _context.SaveChanges();
 
             return Ok(new { message = "Successfully deleted." });

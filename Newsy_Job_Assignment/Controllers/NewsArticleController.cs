@@ -12,20 +12,20 @@ namespace Newsy_Job_Assignment.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_context.newsarticle);
+            return Ok(_context.news_article);
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public IActionResult Get(int id)
         {
-            return Ok(_context.newsarticle.Find(id));
+            return Ok(_context.news_article.Find(id));
         }
 
         [HttpPost]
-        public IActionResult Post(NewsArticle article)
+        public IActionResult Post(News_Article article)
         {
-            _context.newsarticle.Add(article);
+            _context.news_article.Add(article);
             _context.SaveChanges();
             return StatusCode(StatusCodes.Status201Created, article);
         }
@@ -33,17 +33,17 @@ namespace Newsy_Job_Assignment.Controllers
         [HttpPut]
         [Route("{id:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int id, NewsArticle article)
+        public IActionResult Put(int id, News_Article article)
         {
 
-            var articleDb = _context.newsarticle.Find(id);
+            var articleDb = _context.news_article.Find(id);
 
             articleDb.title = article.title;
-            articleDb.articletext = article.articletext;
-            articleDb.authorid = article.authorid;
-            articleDb.publishdate = article.publishdate;
+            articleDb.article_text = article.article_text;
+            articleDb.author_id = article.author_id;
+            articleDb.publish_date = article.publish_date;
 
-            _context.newsarticle.Update(articleDb);
+            _context.news_article.Update(articleDb);
             _context.SaveChanges();
 
             return Ok(new { message = "Successfully updated." });
@@ -55,9 +55,9 @@ namespace Newsy_Job_Assignment.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int id)
         {
-            var articleDb = _context.newsarticle.Find(id);
+            var articleDb = _context.news_article.Find(id);
 
-            _context.newsarticle.Remove(articleDb);
+            _context.news_article.Remove(articleDb);
             _context.SaveChanges();
 
             return Ok(new { message = "Successfully deleted." });
